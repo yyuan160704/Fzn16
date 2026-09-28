@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A little digital love story.">
+<meta property="og:title" content="Our Story"><meta property="og:description" content="Every memory deserves a place.">
+<title>Our Story ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<!-- Opening / love letter -->
+<div id="opening" class="opening">
+  <div class="opening-glow"></div>
+  <div class="opening-content">
+    <div class="mini-label">A LETTER FOR YOU</div>
+    <div class="envelope-wrap" id="envelope">
+      <div class="envelope-shadow"></div>
+      <div class="envelope">
+        <div class="env-back"></div>
+        <div class="env-paper">
+          <span>Untuk seseorang yang spesial...</span>
+        </div>
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+        <div class="seal">♥</div>
+      </div>
+    </div>
+    <h1>Sebuah cerita kecil,<br><em>untuk kamu.</em></h1>
+    <p>Klik suratnya untuk membuka kenangan.</p>
+    <button id="openLetter" class="open-btn">Buka Surat <span>♥</span></button>
+  </div>
+</div>
+
+<div id="site" class="site hidden-site">
+<header class="nav">
+  <a class="brand" href="#">Our Story<span>♥</span></a>
+  <nav><a href="#story">Story</a><a href="#gallery">Memories</a><a href="#letter">Letter</a></nav>
+  <button class="music-mini" id="musicBtn" aria-label="Musik">♫</button>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy reveal">
+    <div class="eyebrow">A LITTLE PLACE FOR US</div>
+    <h1 id="heroTitle">Untuk Kamu,<br><em>Seseorang yang Berarti</em></h1>
+    <p id="heroSubtitle">Setiap kenangan bersamamu layak untuk disimpan.</p>
+    <div class="hero-actions"><a href="#story" class="btn">Mulai Cerita Kita <span>♥</span></a><button class="sound-link" id="heroMusic">♫ Our Song</button></div>
+  </div>
+  <div class="hero-art reveal">
+    <div class="photo-frame">
+      <img id="heroPhoto" src="" alt="Foto utama">
+      <div id="heroFallback" class="hero-placeholder">your<br>favorite<br>photo</div>
+      <div class="frame-caption"><span>our favorite moment</span><i>♥</i></div>
+    </div>
+    <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div><div class="orbit">LOVE • MEMORIES • US •</div>
+  </div>
+</section>
+
+<section class="counter section reveal">
+  <div class="section-label">TIME TOGETHER</div>
+  <h2>Waktu yang terus berjalan,<br>kenangan yang tetap tinggal.</h2>
+  <div class="counter-grid">
+    <div><b id="years">0</b><span>Tahun</span></div><div><b id="months">0</b><span>Bulan</span></div>
+    <div><b id="days">0</b><span>Hari</span></div><div><b id="hours">0</b><span>Jam</span></div>
+    <div><b id="minutes">0</b><span>Menit</span></div><div><b id="seconds">0</b><span>Detik</span></div>
+  </div>
+</section>
+
+<section id="story" class="section reveal">
+  <div class="section-label">OUR STORY</div><h2>Potongan kecil dari<br><em>cerita kita.</em></h2>
+  <div id="timeline" class="timeline"></div>
+</section>
+
+<section id="gallery" class="section reveal">
+  <div class="section-label">MEMORIES</div><h2>Hal-hal kecil yang<br><em>ingin kuingat.</em></h2>
+  <div id="photos" class="gallery"></div>
+  <div id="videos" class="video-grid"></div>
+</section>
+
+<section id="letter" class="letter-section section reveal">
+  <div class="letter-card">
+    <div class="wax">♥</div><div class="section-label">A LETTER FOR YOU</div>
+    <h2 id="letterTitle">Untuk Kamu...</h2><p id="letterText"></p>
+    <div class="signature">always, <strong>me.</strong></div>
+  </div>
+</section>
+
+<section class="secret section reveal">
+  <div class="section-label">ONE LAST THING</div>
+  <button id="secretBtn" class="secret-btn">Pesan Rahasia <span>♥</span></button>
+  <div id="secretBox" class="secret-box"></div>
+</section>
+</main>
+<footer>Made with love · Our Story <span>♥</span></footer>
+</div>
+
+<div id="lightbox" class="lightbox"><button>×</button><img></div>
+<div id="toast" class="toast"></div>
+<div class="hearts" aria-hidden="true"></div>
+<audio id="audio" loop></audio>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin · Our Story</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/admin.css"></head>
+<body>
+<div id="login" class="login"><div class="login-card"><div class="heart">♥</div><h1>Our Story</h1><p>Admin Studio</p><form id="loginForm"><input id="username" placeholder="Username" required><input id="password" type="password" placeholder="Password" required><button>Masuk ke Dashboard</button><small id="loginError"></small></form></div></div>
+<div id="app" class="hidden">
+<aside><div class="logo">Our Story <span>♥</span><small>ADMIN STUDIO</small></div><a href="#overview">Overview</a><a href="#appearance">Appearance</a><a href="#timeline">Timeline</a><a href="#media">Media Library</a><a href="/" target="_blank">Preview Website ↗</a><button id="logout">Keluar</button></aside>
+<main>
+<header><div><div class="eyebrow">PRIVATE LOVE STORY</div><h1>Dashboard</h1><p>Kelola setiap detail cerita dari satu tempat.</p></div><a class="preview" href="/" target="_blank">Preview ↗</a></header>
+<section id="overview" class="stats"><div><span>Foto</span><b id="photoCount">0</b></div><div><span>Video</span><b id="videoCount">0</b></div><div><span>Timeline</span><b id="timelineCount">0</b></div><div><span>Audio</span><b id="audioCount">0</b></div></section>
+
+<section id="appearance" class="panel"><div class="panel-head"><div><span class="eyebrow">WEBSITE</span><h2>Appearance & Content</h2></div><span class="status">● Live</span></div>
+<form id="settingsForm" class="grid">
+<label>Judul utama<input name="site_title"></label><label>Subjudul<input name="hero_subtitle"></label>
+<label>Judul surat<input name="letter_title"></label><label>Tanggal mulai<input name="start_date" type="date"></label>
+<label class="wide">Isi surat<textarea name="letter_text" rows="6"></textarea></label><label class="wide">Pesan rahasia<textarea name="secret_message" rows="3"></textarea></label>
+<label>Nama musik<input name="music_label"></label><label>Warna aksen<input name="accent" type="color"></label>
+<button class="primary wide">Simpan Perubahan</button></form>
+<div class="hero-upload"><div><span class="eyebrow">HERO PHOTO</span><h3>Foto utama</h3><p>Foto ini akan tampil sebagai foto utama di halaman pembuka cerita.</p></div>
+<form id="heroForm"><input name="file" type="file" accept="image/jpeg,image/png,image/webp" required><button class="secondary">Ganti Foto Utama</button></form></div></section>
+
+<section id="timeline" class="panel"><div class="panel-head"><div><span class="eyebrow">MEMORIES</span><h2>Timeline Kenangan</h2></div></div>
+<form id="timelineForm" class="grid"><input type="hidden" name="id"><label>Tanggal<input name="date" type="date" required></label><label>Judul<input name="title" required></label><label class="wide">Cerita<textarea name="story" rows="4" required></textarea></label><label class="wide">Foto timeline (opsional)<input name="image" placeholder="/uploads/nama-file.jpg"></label><button class="primary wide">Simpan Timeline</button></form><div id="timelineList"></div></section>
+
+<section id="media" class="panel"><div class="panel-head"><div><span class="eyebrow">MEDIA LIBRARY</span><h2>Upload Foto, Video & Musik</h2></div></div>
+<form id="mediaForm" enctype="multipart/form-data" class="grid"><label>Jenis<select name="type"><option value="photo">Foto</option><option value="video">Video</option><option value="audio">Musik</option></select></label><label>Judul<input name="title" required></label><label class="wide">Caption<input name="caption"></label><label class="wide">File<input name="file" type="file" required accept="image/*,video/mp4,video/webm,audio/*"></label><button class="primary wide">Upload ke Library</button></form><div id="mediaList"></div></section>
+</main></div><script src="/admin.js"></script></body></html>
