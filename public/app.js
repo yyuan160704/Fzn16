@@ -1,0 +1,23 @@
+const $=s=>document.querySelector(s);let state=null;
+async function load(){const r=await fetch("/api/public");state=await r.json();const s=state.settings;document.title=s.site_title;
+$("#heroTitle").innerHTML=esc(s.site_title).replace(/,\s*/,",<br>");
+$("#heroSubtitle").textContent=s.hero_subtitle;$("#letterTitle").textContent=s.letter_title;$("#letterText").textContent=s.letter_text;
+document.documentElement.style.setProperty("--accent",s.accent||"#b76e79");renderHero();renderTimeline();renderPhotos();renderVideos();if(state.audio){$("#audio").src="/uploads/"+encodeURIComponent(state.audio.filename)}
+startCounter(s.start_date);}
+function renderHero(){const hero=state.settings.hero_image;if(hero){$("#heroPhoto").src=hero.startsWith("/uploads/")?hero:"/uploads/"+encodeURIComponent(hero);$("#heroPhoto").classList.add("ready");$("#heroFallback").style.display="none"}}
+function renderTimeline(){$("#timeline").innerHTML=state.timeline.length?state.timeline.map(x=>`<article class="item"><i class="dot"></i><div class="date">${esc(x.date)}</div><h3>${esc(x.title)}</h3><p>${esc(x.story)}</p>${x.image?`<img src="${esc(x.image.startsWith("/uploads/")?x.image:"/uploads/"+x.image)}" alt="">`:""}</article>`).join(""):`<p style="color:var(--muted)">Cerita kita akan muncul di sini...</p>`}
+function renderPhotos(){$("#photos").innerHTML=state.photos.map(x=>`<figure onclick="openPhoto('/uploads/${encodeURIComponent(x.filename)}')"><img loading="lazy" src="/uploads/${encodeURIComponent(x.filename)}" alt="${esc(x.title)}"><figcaption>${esc(x.title)} · ${esc(x.caption)}</figcaption></figure>`).join("")}
+function renderVideos(){$("#videos").innerHTML=state.videos.map(x=>`<article class="video-card"><video controls preload="metadata" src="/uploads/${encodeURIComponent(x.filename)}"></video><h3>${esc(x.title)}</h3><p>${esc(x.caption)}</p></article>`).join("")}
+function startCounter(date){const start=new Date(date+"T00:00:00");const tick=()=>{let ms=Math.max(0,Date.now()-start.getTime()),sec=Math.floor(ms/1000),days=Math.floor(sec/86400),years=Math.floor(days/365.2425),months=Math.floor(days/30.4375)%12;$("#years").textContent=years;$("#months").textContent=months;$("#days").textContent=days%30;$("#hours").textContent=Math.floor(sec/3600)%24;$("#minutes").textContent=Math.floor(sec/60)%60;$("#seconds").textContent=sec%60};tick();setInterval(tick,1000)}
+function openPhoto(src){$("#lightbox img").src=src;$("#lightbox").classList.add("show")}
+$("#lightbox").onclick=e=>{if(e.target.id==="lightbox"||e.target.tagName==="BUTTON")$("#lightbox").classList.remove("show")}
+async function toggleMusic(){const a=$("#audio");if(!a.src)return toast("Tambahkan musik dari Admin terlebih dahulu.");try{if(a.paused){await a.play();$("#musicBtn").classList.add("playing");$("#musicBtn").textContent="❚❚"}else{a.pause();$("#musicBtn").classList.remove("playing");$("#musicBtn").textContent="♫"}}catch{toast("Musik diblokir browser. Tekan tombol lagi untuk memutar.")}}
+$("#musicBtn").onclick=toggleMusic;$("#heroMusic").onclick=toggleMusic;
+$("#secretBtn").onclick=()=>{const b=$("#secretBox");b.textContent=state.settings.secret_message;b.classList.toggle("show");burstHearts(12)}
+function burstHearts(n){for(let i=0;i<n;i++){const h=document.createElement("span");h.className="heart";h.textContent="♥";h.style.left=(45+Math.random()*10)+"%";h.style.bottom=(15+Math.random()*20)+"%";h.style.fontSize=(12+Math.random()*22)+"px";h.style.animationDuration=(2+Math.random()*2)+"s";$(".hearts").appendChild(h);setTimeout(()=>h.remove(),4500)}}
+setInterval(()=>{const h=document.createElement("span");h.className="heart";h.textContent=Math.random()>.45?"♥":"✦";h.style.left=Math.random()*100+"%";h.style.fontSize=(9+Math.random()*16)+"px";h.style.animationDuration=(7+Math.random()*6)+"s";$(".hearts").appendChild(h);setTimeout(()=>h.remove(),14000)},1700);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.08});document.querySelectorAll(".reveal").forEach(x=>io.observe(x));
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function toast(t){const x=$("#toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),3000)}
+const open=()=>{$("#envelope").classList.add("open");setTimeout(()=>{$("#opening").classList.add("closed");$("#site").classList.remove("hidden-site");setTimeout(()=>document.querySelectorAll(".reveal").forEach(x=>x.classList.add("visible")),350);burstHearts(28)},850)}
+$("#openLetter").onclick=open;$("#envelope").onclick=open;
+load();
